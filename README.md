@@ -18,5 +18,9 @@ npm install
 npm start
 ```
 
+2) Then launch a browser and navigate to the suggested url in the terminal e.g.
+
+http://localhost:4200
+
 ## Running the tests
 1) Run npm test
