@@ -6,6 +6,7 @@ included material design if time permitted.
 
 ### To install
 1) Clone this repo https://github.com/ahmedhaji/pl-translator.git
+
 2) Then run
 ```
 npm install
