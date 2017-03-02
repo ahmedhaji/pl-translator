@@ -1,0 +1,7 @@
+<div>
+  <label for="textToTranslate"></label>
+  <input id="textToTranslate" class="translate-from" type="text" #text>
+  <input type="submit" value="Translate" (click)="onTranslate(text)">
+  <hr>
+  <plt-pig-latin-translator-history></plt-pig-latin-translator-history>
+</div>
