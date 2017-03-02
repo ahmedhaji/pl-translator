@@ -12,7 +12,7 @@ included material design if time permitted.
 npm install
 ```
 
-## To run the app
+### To run the app
 1) Open Terminal and run 
 ```
 npm start
@@ -22,5 +22,9 @@ npm start
 
 http://localhost:4200
 
-## Running the tests
-1) Run npm test
+
+### To run tests
+1) Run 
+```
+npm test
+```
