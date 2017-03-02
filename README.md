@@ -1,8 +1,8 @@
 # pl-translator
 
-This application converts english words to pig latin. It it written in ng2 and utilises RxJS and typescript.
-You'll find tests included ;) I didn't focus on presentation so please excuse that side of things - I would have 
-included material design if I had more time. 
+This web application converts english words to pig latin. It is written in ng2 and utilises RxJS and typescript.
+You'll find tests included also ;) I didn't focus on presentation so I apologise in advance - I would have 
+included material design if time permitted. 
 
 ### To install
 1) Clone this repo
