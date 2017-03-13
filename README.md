@@ -1,6 +1,6 @@
 # Pig Latin Translator
 
-A web application for translating from English to pig latin. It is written in Angular2 and TypeScript and uses RxJS observables 
+A web application for translating from English to Pig Latin. It is written in Angular2 and TypeScript and uses RxJS observables 
 and Angular Material. You'll find component tests, service tests (particularly on observables) and custom pipes. 
 
 ### To install
