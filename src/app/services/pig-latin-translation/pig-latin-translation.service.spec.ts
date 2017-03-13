@@ -9,16 +9,20 @@ describe('PigLatinTranslatorService', () => {
     });
   });
 
-  it(`should translate word 'apple' to 'ppleai'`, inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
-    expect(service.translate('apple')).toBe('ppleai');
+  it(`should translate word beginning with vowel`, inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
+    expect(service.translate('apple')).toBe('appleway');
   }));
 
-  it(`should translate word 'pig' to 'igpay'`, inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
+  it(`should translate word beginning with consonant`, inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
     expect(service.translate('pig')).toBe('igpay');
   }));
 
-  it(`should translate sentence 'hello world' to 'ellohay orldway'`, inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
-    expect(service.translate('hello world')).toBe('ellohay orldway');
+  it('should translate consonant clusters', inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
+    expect(service.translate('rhythm')).toBe('ythmrhay');
+  }));
+
+  it(`should translate sentences `, inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
+    expect(service.translate('pig latin')).toBe('igpay atinlay');
   }));
 
   it(`should keep a log of last 10 translations`, inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
@@ -58,7 +62,8 @@ describe('PigLatinTranslatorService', () => {
     service.translate('hello');//adding 1 more should append the last 1 to the list and remove the oldest record
 
     expect(result.length).toBe(10);
-    expect(result[9]).toEqual({translateFrom:'hello',translateTo:'ellohay'})//the last item added
+    expect(result[9]).toEqual({translateFrom:'hello',translateTo:'ellohay'});//the last item added
   }));
+
 
 });

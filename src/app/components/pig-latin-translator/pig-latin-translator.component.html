@@ -1,7 +1,14 @@
-<div>
-  <label for="textToTranslate"></label>
-  <input id="textToTranslate" class="translate-from" type="text" #text>
-  <input type="submit" value="Translate" (click)="onTranslate(text)">
+<div class="pig-latin-translator">
+  <md-input-container >
+    <input id="textToTranslate"
+           class="translate-from"
+           type="text"
+           mdInput
+           placeholder="Text to translate"
+           (keyup.enter)="onTranslate(text)"
+           #text>
+  </md-input-container>
+  <button (click)="onTranslate(text)" md-button>Translate </button>
   <hr>
-  <plt-pig-latin-translator-history></plt-pig-latin-translator-history>
+  <plt-pig-latin-translator-history ></plt-pig-latin-translator-history>
 </div>

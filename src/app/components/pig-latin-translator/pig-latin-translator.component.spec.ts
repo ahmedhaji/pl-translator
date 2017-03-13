@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { PigLatinTranslatorComponent } from './pig-latin-translator.component';
 import { PigLatinTranslatorHistoryComponent } from '../pig-latin-translator-history/pig-latin-translator-history.component';
@@ -17,9 +18,9 @@ describe('PigLatinTranslatorComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        PigLatinTranslatorComponent,
-        PigLatinTranslatorHistoryComponent
-      ]
+        PigLatinTranslatorComponent
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .overrideComponent(PigLatinTranslatorComponent, {
       set: {
@@ -39,7 +40,7 @@ describe('PigLatinTranslatorComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PigLatinTranslatorComponent);
     component = fixture.componentInstance;
-    // get the component's injected PigLatinTranslationServiceSpy
+    // get the component's injected spy PigLatinTranslationServiceSpy
     pigLatinTranslationServiceSpy = fixture.debugElement.injector.get(PigLatinTranslationService);
     fixture.detectChanges();
   });
@@ -55,24 +56,23 @@ describe('PigLatinTranslatorComponent', () => {
 
   it('should render the translation history component', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.pig-latin-translator-history')).not.toBeNull();
+    expect(compiled.querySelector('plt-pig-latin-translator-history')).not.toBeNull();
   });
 
   it('should make a call translation service when onTranslate is called', () => {
-    let inputElem = {
-      value: 'hello'
-    };
+    let inputElem = fixture.debugElement.nativeElement.querySelector('input');
+    inputElem.value = 'hello';
     spyOn(pigLatinTranslationServiceSpy, 'translate');
     component.onTranslate(inputElem);
     expect(pigLatinTranslationServiceSpy.translate).toHaveBeenCalledWith('hello');
   });
 
   it('should clear input field', () => {
-    let inputElem = {
-      value: 'hello'
-    };
+    let inputElem = fixture.debugElement.nativeElement.querySelector('input');
+    inputElem.value = 'hello';
     component.onTranslate(inputElem);
     expect(inputElem.value).toBe('');
   });
+
 
 });

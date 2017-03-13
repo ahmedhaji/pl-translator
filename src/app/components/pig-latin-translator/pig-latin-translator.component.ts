@@ -8,7 +8,6 @@ import { PigLatinTranslationService } from '../../services/pig-latin-translation
   providers: [PigLatinTranslationService]
 })
 export class PigLatinTranslatorComponent implements OnInit {
-
   constructor(private pigLatinTranslationService:PigLatinTranslationService) {
   }
 
@@ -18,6 +17,7 @@ export class PigLatinTranslatorComponent implements OnInit {
   onTranslate(textInput) {
     this.pigLatinTranslationService.translate(textInput.value);
     textInput.value = '';
+    textInput.focus();
   }
 
 }

@@ -1,5 +1,12 @@
-<div class="pig-latin-translation-history">
-  <div *ngFor="let item of translationHistory;let i = index;">
-    <label>{{ item.translateFrom + ' = ' + item.translateTo }}</label>
-  </div>
+<div class="pig-latin-translator-history">
+    <md-list *ngIf="(translationHistory$ | async)?.length>0">
+      <div class="row">
+        <div class="col-header col-lg-6 col-md-6 col-sm-6 col-xs-6">English</div>
+        <div class="col-header col-lg-6 col-md-6 col-sm-6 col-xs-6">Pig Latin</div>
+      </div>
+      <div class="row" *ngFor="let item of translationHistory$ | async | reverse">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{item.translateFrom}}</div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{item.translateTo}}</div>
+      </div>
+    </md-list>
 </div>

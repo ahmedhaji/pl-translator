@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { PigLatinTranslationService } from '../../services/pig-latin-translation/pig-latin-translation.service'
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'plt-pig-latin-translator-history',
@@ -8,15 +9,14 @@ import { PigLatinTranslationService } from '../../services/pig-latin-translation
 })
 export class PigLatinTranslatorHistoryComponent implements OnInit {
 
-  public translationHistory:{translateFrom:string,translateTo:string}[];
+  public translationHistory$:Observable<{translateFrom:string,translateTo:string}[]>;
 
   constructor(private pigLatinTranslationService:PigLatinTranslationService) {
   }
 
   ngOnInit() {
-    this.pigLatinTranslationService.translationHistory.subscribe((data) => {
-      this.translationHistory = data;
-    });
+    this.translationHistory$ = this.pigLatinTranslationService.translationHistory
+      .map((resp)=>resp);
   }
 
 }

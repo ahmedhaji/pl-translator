@@ -1,0 +1,12 @@
+.pig-latin-translator-history {
+  padding: 0 15px;
+  color: #666;
+}
+.col-header {
+  font-weight: 900;
+  border-bottom: solid 1px #666;
+}
+
+.row div{
+  padding: 10px;
+}

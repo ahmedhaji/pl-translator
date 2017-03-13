@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Observable,BehaviorSubject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+
+const CONSONANTS = ['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
+const VOWELS = ['A','E','I','O','U'];
 
 @Injectable()
 export class PigLatinTranslationService {
@@ -14,14 +17,14 @@ export class PigLatinTranslationService {
   }
 
   private isConsonant(letter:string='') {
-    return ['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'].indexOf(letter.toUpperCase()) > -1;
+    return CONSONANTS.indexOf(letter.toUpperCase()) > -1;
   }
 
-  private isVowel(letter:string='') {
-    return ['A','E','I','O','U'].indexOf(letter.toUpperCase()) > -1;
+  private isVowel(letter:string=''):boolean {
+    return VOWELS.indexOf(letter.toUpperCase()) > -1;
   }
 
-  private updateTranslationHistory(originalText, translatedText) {
+  private updateTranslationHistory(originalText, translatedText):void {
     const newTranslationHistory = this.dataStore.translationHistory.concat({
       translateFrom: originalText,
       translateTo: translatedText
@@ -34,17 +37,39 @@ export class PigLatinTranslationService {
     this._translationHistory.next(this.dataStore.translationHistory);
   }
 
+  private convertWordBeginningWithConsonant(word:string):string {
+    const len:number = word.length;
+    let vowels:Array<string> = VOWELS.concat('Y');//Y is considered a vowel when word begins with consonant
+    let startOfVowel:number = 0;
+
+    //should cater for consonant clusters e.g. [sh]ip [sw]agger
+    for (let i:number=0;i<len;i++) {
+      if (vowels.indexOf(word.charAt(i).toUpperCase()) > -1) {
+        startOfVowel = i;
+        break;
+      }
+    }
+
+    return (word.substr(startOfVowel) + word.substring(0,startOfVowel) + 'ay').toLowerCase();
+  }
+
+  private convertWordBeginningWithVowel(word:string):string {
+    return word + 'way'
+  }
+
   translate(textToTranslate:string='') {
     const words = textToTranslate.split(/[ ]+/);
     let resultInArr = [];
 
     for (let i=0;i<words.length;i++) {
-      const word = words[i];
+      const word:string = words[i];
       const letter = word.substr(0,1);
       if(this.isVowel(letter)) {
-        resultInArr.push(word.substr(1) + letter + 'i');
+        let result:string = this.convertWordBeginningWithVowel(word);
+        resultInArr.push(result);
       } else if (this.isConsonant(letter)) {
-        resultInArr.push(word.substr(1) + letter + 'ay');
+        let result:string = this.convertWordBeginningWithConsonant(word);
+        resultInArr.push(result);
       }
     }
 
