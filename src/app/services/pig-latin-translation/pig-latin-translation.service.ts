@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-const CONSONANTS = ['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
-const VOWELS = ['A','E','I','O','U'];
+const CONSONANTS = ['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Z'];
+const VOWELS = ['A','E','I','O','U','Y'];// y is treated as a vowel
 
 @Injectable()
 export class PigLatinTranslationService {
@@ -39,12 +39,11 @@ export class PigLatinTranslationService {
 
   private convertWordBeginningWithConsonant(word:string):string {
     const len:number = word.length;
-    let vowels:Array<string> = VOWELS.concat('Y');//Y is considered a vowel when word begins with consonant
     let startOfVowel:number = 0;
 
     //should cater for consonant clusters e.g. [sh]ip [sw]agger
     for (let i:number=0;i<len;i++) {
-      if (vowels.indexOf(word.charAt(i).toUpperCase()) > -1) {
+      if (VOWELS.indexOf(word.charAt(i).toUpperCase()) > -1) {
         startOfVowel = i;
         break;
       }

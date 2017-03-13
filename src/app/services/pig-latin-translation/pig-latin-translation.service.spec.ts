@@ -13,12 +13,17 @@ describe('PigLatinTranslatorService', () => {
     expect(service.translate('apple')).toBe('appleway');
   }));
 
+
   it(`should translate word beginning with consonant`, inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
     expect(service.translate('pig')).toBe('igpay');
   }));
 
   it('should translate consonant clusters', inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
     expect(service.translate('rhythm')).toBe('ythmrhay');
+  }));
+
+  it(`should treat 'y' as a vowel`, inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
+    expect(service.translate('yellow')).toBe('yellowway');
   }));
 
   it(`should translate sentences `, inject([PigLatinTranslationService], (service: PigLatinTranslationService) => {
